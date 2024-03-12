@@ -10,6 +10,9 @@ on:
         type: environment
         description: Select the environment
 
+permissions:
+  packages: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -38,12 +41,11 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           flavor: |
-            latest=true
+            latest=false
           images: |
             name=ghcr.io/${{ github.repository_owner }}/windmill-playwright
           tags: |
-            type=ref,event=pr
-            type=raw,value=test,enable=true
+            type=raw,value=main,enable=true
 
       - name: Build and push server
         uses: docker/build-push-action@v5
