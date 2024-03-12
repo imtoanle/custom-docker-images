@@ -33,9 +33,21 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Generate docker image tags
+        id: metadata
+        uses: docker/metadata-action@v5
+        with:
+          flavor: |
+            latest=true
+          images: |
+            name=ghcr.io/${{ github.repository_owner }}/windmill-playwright
+          tags: |
+            type=ref,event=pr
+            type=raw,value=test,enable=true
+
       - name: Build and push server
         uses: docker/build-push-action@v5
         with:
           context: ./windmill
           push: true
-          tags: imtoanle/windmill-playwright:latest
+          tags: ${{ steps.metadata.outputs.tags }}
