@@ -1,6 +1,7 @@
 FROM ghcr.io/windmill-labs/windmill:main
 
-RUN npm install -g playwright@latest
-RUN npx playwright install-deps chromium
+RUN pip install playwright
+RUN playwright install
+RUN playwright install-deps
 
 CMD ["windmill"]
