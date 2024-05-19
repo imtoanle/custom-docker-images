@@ -1,9 +1,9 @@
 name: Windmill Docker Image Auto Release
 
 on:
-  schedule:
-    # Set a schedule to check for changes, e.g., every day
-    - cron: "0 0 * * *"
+  # schedule:
+  #   # Set a schedule to check for changes, e.g., every day
+  #   - cron: "0 0 * * *"
   workflow_dispatch:
     inputs:
       environment:
